@@ -1,7 +1,10 @@
+package com.example.webscraperjavafx;
+
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
+
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
@@ -10,21 +13,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class Main {
-    public static void main(String[] args) {
-        GameScraper scraper = new GameScraper();
-
-        try {
-            scraper.multiScrape(1, 5);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        scraper.printGames();
-    }
-}
-
-class GameScraper {
+public class GameScraper {
     private final String baseUrl = "https://eshop-prices.com/games?currency=BRL";
     private final Map<String, String> headers = new HashMap<>();
 
@@ -61,19 +50,15 @@ class GameScraper {
         }
     }
 
-    public void multiScrape(int start, int end) throws IOException {
-        for (int pageNumber = start; pageNumber <= end; pageNumber++) {
+    public void multiScrape(int startPage, int endPage) throws IOException {
+        for (int pageNumber = startPage; pageNumber <= endPage; pageNumber++) {
             scrape(pageNumber);
         }
     }
 
-    public void printGames() {
-        System.out.println("Jogos detectados: " + allGames.size());
-        for (Map<String, String> game : allGames) {
-            System.out.println("Game:      " + game.get("Nome"));
-            System.out.println("Valor:     " + game.get("Valor"));
-            System.out.println("Categoria: " + game.get("Categoria") + "\n");
-        }
+
+    public List<Map<String, String>> getAllGames() {
+        return allGames;
     }
 
     private String encodeGameName(String gameName) throws UnsupportedEncodingException {

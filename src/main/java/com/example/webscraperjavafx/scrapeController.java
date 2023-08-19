@@ -4,23 +4,22 @@ import javafx.application.Platform;
 import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
 
 import java.util.List;
 import java.util.Map;
 
-public class HelloController {
+public class scrapeController {
     @FXML
     private TextArea gameInfoTextArea;
 
-    public void onHelloButtonClick() {
-        int pageCount = 1; // Set the desired page count here
+    public void onextractButtonClick() {
+        int pageCount = 1; //Set page count to scrape (set 1 for testing, otherwise it will take too long to scrape)
 
         Task<Void> scrapeTask = new Task<Void>() {
             @Override
             protected Void call() throws Exception {
                 GameScraper gameScraper = new GameScraper();
-                gameScraper.multiScrape(1, pageCount); // Scrape multiple pages
+                gameScraper.multiScrape(1, pageCount); // Scrape multiple pages method
 
                 List<Map<String, String>> allGames = gameScraper.getAllGames();
 
@@ -31,11 +30,13 @@ public class HelloController {
                     gameInfo.append("Categoria: ").append(game.get("Categoria")).append("\n\n");
                 }
 
+                //Updates textArea in fxml to display scraped games.
                 Platform.runLater(() -> gameInfoTextArea.setText(gameInfo.toString()));
                 return null;
             }
         };
 
+        //Intialize task in new thread
         Thread thread = new Thread(scrapeTask);
         thread.setDaemon(true);
         thread.start();

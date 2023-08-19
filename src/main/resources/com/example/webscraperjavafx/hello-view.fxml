@@ -5,17 +5,18 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.TextArea?>
 
-<!-- fx="http://javafx.com/fxml/1" Esse /1 e xmlns="http://javafx.com/javafx/20.0.1" impedem o funcionamento do scraper -->
+<!-- fx="http://javafx.com/fxml/1" -> /1 <- and xmlns="http://javafx.com/javafx/20.0.1" prevents the app from working -->
 <!-- alignment="CENTER" spacing="20.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/20.0.1" fx:controller="com.example.webscraperjavafx.HelloController" -->
 
-<!-- Essa linha da B.O quando usa o Scene Builder -->
-<VBox alignment="CENTER" spacing="20.0" xmlns:fx="http://javafx.com/fxml" fx:controller="com.example.webscraperjavafx.HelloController">
+<!-- VBOX LIGN SHOULD ALWAYS LOOK LIKE -> alignment="CENTER" spacing="20.0" xmlns:fx="http://javafx.com/fxml" fx:controller="com.example.webscraperjavafx.scrapeController" <_ -->
+
+<VBox alignment="CENTER" spacing="20.0" xmlns:fx="http://javafx.com/fxml" fx:controller="com.example.webscraperjavafx.scrapeController">
     <padding>
         <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
     </padding>
 
-    <Label fx:id="welcomeText" />
-    <Button onAction="#onHelloButtonClick" text="Extrair Dados." />
+    <Label fx:id="extractButton" />
+    <Button onAction="#onextractButtonClick" text="Extrair Dados." />
     <TextArea fx:id="gameInfoTextArea" />
 </VBox>
 
